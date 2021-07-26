@@ -1,4 +1,7 @@
 <?php
+// Define o locale e o fuso horário
+setlocale(LC_ALL, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+date_default_timezone_set('America/Bahia');
 
 function lerDadosDosArquivosCSV($fileInputName)
 {
@@ -76,7 +79,7 @@ function marcaPresenca($dadosLog, $datasAula, $horaInicio, $horaFim, $antecipaca
         $presenca[$aluno] = array_intersect($datasAula, $dias);
     }
 
-    ksort($presenca);
+    ksort($presenca, SORT_LOCALE_STRING);
 
     return $presenca;
 }

@@ -1,10 +1,6 @@
 <?php 
 require_once 'helpers.php';
 
-// Define o locale e o fuso horário
-setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
-date_default_timezone_set('America/Bahia');
-
 // Inicia a sessão
 session_start();
 
@@ -31,20 +27,25 @@ define("AUSENTE", '2');
        .table-responsive {
             display: block;
             width: 100%;
-            /* margin-left:15em; */
             overflow-x: scroll;
             -webkit-overflow-scrolling: touch;
             -ms-overflow-style: -ms-autohiding-scrollbar;
         }
 
+        table {
+            width: 200%;
+        }
+
         .fixed-col {
-            position: -webkit-sticky;
-            position: sticky;
-            left:0;
-            top:auto;
+            position: sticky; 
+            left: 0;
+            top: auto;
             background-color: white;
         }
 
+        .ausente {
+            background-color: coral;
+        }
     </style>
 
     <!-- Compiled and minified JavaScript -->
@@ -64,7 +65,7 @@ define("AUSENTE", '2');
 <body>
     <div class="container">
         <div class="row">
-            <h4>Calcula presenças</h4>
+            <h4>Contador de presença</h4>
             <form class="col s12" action="verificaFaltas.php" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s6">
@@ -143,7 +144,8 @@ define("AUSENTE", '2');
                     <tr>
                         <td class="fixed-col"><?php echo $aluno; ?></td>
                         <?php foreach ($_SESSION['datasAulas'] as $key => $data): ?>
-                        <td><?php echo naMesmaSemana($data, @$datas[intval($key / count($_SESSION['diasComAula']))]) ? PRESENTE : AUSENTE; ?></td>
+                        <?php $presente = naMesmaSemana($data, @$datas[intval($key / count($_SESSION['diasComAula']))]); ?>
+                        <td class="<?php echo $presente ? "presente" : "ausente"; ?>"><?php echo $presente ? PRESENTE : AUSENTE; ?></td>
                         <?php endforeach; ?>
                     </tr>
                     <?php endforeach; ?>
