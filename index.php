@@ -9,8 +9,8 @@ date_default_timezone_set('America/Bahia');
 session_start();
 
 // Define como serão exibidas as presenças
-define("PRESENTE", '2');
-define("AUSENTE", '0');
+define("PRESENTE", '0');
+define("AUSENTE", '2');
 ?>
 <!DOCTYPE html>
 <html>
