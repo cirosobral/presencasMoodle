@@ -84,6 +84,21 @@ function marcaPresenca($dadosLog, $datasAula, $horaInicio, $horaFim, $antecipaca
     return $presenca;
 }
 
+function marcaPresencaAssincrona($presencas, $datasAssincrona)
+{
+    foreach ($presencas as $aluno => $presenca) {
+        $presencasAssincronas[$aluno] = array_filter($datasAssincrona, function ($el) use ($presenca) {
+            foreach ($presenca as $dia) {
+                if ($mesmaSemana = naMesmaSemana($el, $dia))
+                    break;
+            }
+            return $mesmaSemana;
+        });
+    }
+    
+    return $presencasAssincronas;
+}
+
 function somaTempos(...$tempos)
 {
     $i = 0;

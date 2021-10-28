@@ -7,6 +7,7 @@ session_start();
 // Define como serão exibidas as presenças
 define("PRESENTE", '0');
 define("AUSENTE", '2');
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -89,7 +90,7 @@ define("AUSENTE", '2');
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <label>Dias de aulas síncornas</label>
+                        <label>Dias de aulas síncronas</label>
                     </div>
                     <?php for ($i = 1 ; $i <= 6; $i++): ?>
                     <label class="col s2">
@@ -100,7 +101,7 @@ define("AUSENTE", '2');
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <label>Dias de aulas assíncornas</label>
+                        <label>Dias de aulas assíncronas</label>
                     </div>
                     <?php for ($i = 1 ; $i <= 6; $i++): ?>
                     <label class="col s2">
@@ -144,7 +145,7 @@ define("AUSENTE", '2');
                     <tr>
                         <td class="fixed-col"><?php echo $aluno; ?></td>
                         <?php foreach ($_SESSION['datasAulas'] as $key => $data): ?>
-                        <?php $presente = naMesmaSemana($data, @$datas[intval($key / count($_SESSION['diasComAula']))]); ?>
+                        <?php $presente = in_array($data, $datas); ?>
                         <td class="<?php echo $presente ? "presente" : "ausente"; ?>"><?php echo $presente ? PRESENTE : AUSENTE; ?></td>
                         <?php endforeach; ?>
                     </tr>
